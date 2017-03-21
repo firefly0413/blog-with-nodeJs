@@ -1,8 +1,85 @@
+html {
+	-webkit-text-size-adjust: none;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+	font: normal 14px/1.5 "Hiragino Sans GB", "Microsoft YaHei", "hei", Arial, "Lucida Grande", Verdana;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+hr,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	margin: 0;
+	padding: 0;
+}
+
+
+/*base.css start*/
+
+ol,
+ul {
+	list-style: none;
+}
+
+capation,
+th {
+	text-align: left;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: 100%;
+	font-weight: normal;
+}
 body{
 	background:#eee;
-	margin:0;padding:0;
-	font-family:"微软雅黑";
-	font-size:16px;
+}
+.text_blue{
+	color:#06f;
+	cursor:pointer;
 }
 .header{
 	width:100%;
@@ -16,19 +93,68 @@ body{
 	position:relative;
 	width:100%;
 	height:700px;
+	overflow: hidden;
+}
+.left_side{
+	width:70%;
+	height:100%;
+	float: left;
+}
+.right_side{
+	width:30%;
+	height:100%;
+	float: left;
 }
 .registBox{
-	position:absolute;
-	top:30px;
-	right:50px;
+	margin-top:30px;
+	margin-right:50px;
 	width:200px;
 	background:#fff;
 	padding:20px;
+	display: none;
+}
+.loginBox{
+	margin-top:30px;
+	margin-right:50px;
+	width:200px;
+	background:#fff;
+	padding:20px;
+}
+.user_panel{
+	margin-top:30px;
+	margin-right:50px;
+	width:200px;
+	background:#fff;
+	padding:20px;
+	display: none;
+}
+.title{
+	width:100%;
+	height:30px;
+	line-height:30px;
+	border-bottom:1px solid #ddd;
+}
+.title span{
+	display: inline-block;
+	padding-right:20px;
+	height:100%;
+	border-bottom:2px solid #f90;
+}
+.user_panel p{
+	line-height:35px;
+	font-size:14px;
+}
+.login_text{
+	color:red;
+}
+.user_panel a{
+	line-height:35px;
 }
 .line{
 	width:100%;
 	height:40px;
 	line-height:40px;
+	margin-top:10px;
 }
 .line span{
 	width:80px;
@@ -50,4 +176,11 @@ body{
 	margin:10px 0 0 60px;
 	border:none;
 	border-radius:5px;
+}
+.prompt_info{
+	color:red;
+	margin-top:15px;
+	display: inline-block;
+	width:100%;
+	text-align:center;
 }
