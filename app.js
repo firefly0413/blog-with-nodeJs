@@ -52,7 +52,7 @@ app.use("/",require("./routers/main"));
 //监听app请求
 mongoose.connect("mongodb://localhost:27017/blog",function(err){
 	if(err){
-		console.log("数据库连接失败");
+		console.log(err);
 	}else{
 		console.log("数据库连接成功");
 		app.listen(8081);

@@ -11,12 +11,17 @@
 	<script src="/public/js/index.js"></script>
 </head>
 <body>
-	<div class="header">
-		欢迎来到我的博客
-	</div>
-	<div class="content">
+<div class="header">
+	欢迎来到我的博客
+</div>
+<div class="content">
+	<div class="left_side"></div>
+	<div class="right_side">
 		<div class="registBox">
 			<form id="i_regForm">
+				<div class="title">
+					<span>注册</span>
+				</div>
 				<div class="line">
 					<span>用户名：</span>
 					<input type="text" name="username" />
@@ -31,7 +36,36 @@
 				</div>
 			</form>
 			<button class="subBtn" id="i_regist">注册</button>
+			<p class="prompt_info j_promptInfo"></p>
+			<p>已经有账号了？马上去<span class="text_blue j_toLogin">登录</span></p>
+		</div>
+		<div class="loginBox">
+			<form id="i_logForm">
+				<div class="title">
+					<span>登录</span>
+				</div>
+				<div class="line">
+					<span>用户名：</span>
+					<input type="text" name="username" />
+				</div>
+				<div class="line">
+					<span>密码：</span>
+					<input type="password" name="password" />
+				</div>
+			</form>
+			<button class="subBtn" id="i_login">登录</button>
+			<p class="prompt_info j_promptInfo"></p>
+			<p>还没有账号？马上去<span class="text_blue j_toReg">注册</span></p>
+		</div>
+		<div class="user_panel" id="i_userPanel">
+			<div class="title">
+				<span>用户信息</span>
+			</div>
+			<p class="j_userName"></p>
+			<p class="login_text">您好，欢迎光临我的博客!</p>
+			<a href="javascript:;">退出</a>
 		</div>
 	</div>
+</div>
 </body>
 </html>

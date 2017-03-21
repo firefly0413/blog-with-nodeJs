@@ -74,4 +74,46 @@ router.post("/user/register",function(req,res,next){
 
 });
 
+//用户登录
+
+router.post("/user/login",function(req,res,next){
+	var username = req.body.username;
+	var password = req.body.password;
+
+	//用户名和密码不能为空
+	if(!username || !password){
+		responseData.code=5;
+		responseData.message = "用户名或密码不能为空";
+		res.json(responseData);
+		return;
+	}
+
+	//找不到用户名
+	User.findOne({
+		username:username
+	}).then(function(userInfo){
+		if(!userInfo){
+			//表示数据库中找不到该条数据
+			responseData.code=6;
+			responseData.message = "用户未注册";
+			res.json(responseData);
+			return;
+		}else{
+			if(password!=userInfo.password){
+				//表示密码不正确
+				responseData.code=7;
+				responseData.message = "密码错误";
+				res.json(responseData);
+				return;
+			}
+			responseData.message = "登陆成功";
+			responseData.userInfo={
+				username:userInfo.username,
+				id:userInfo.id
+			}
+			res.json(responseData);
+		}
+	})
+})
+
 module.exports = router;
