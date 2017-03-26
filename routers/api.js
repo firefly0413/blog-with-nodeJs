@@ -79,7 +79,6 @@ router.post("/user/register",function(req,res,next){
 router.post("/user/login",function(req,res,next){
 	var username = req.body.username;
 	var password = req.body.password;
-
 	//用户名和密码不能为空
 	if(!username || !password){
 		responseData.code=5;
@@ -110,10 +109,22 @@ router.post("/user/login",function(req,res,next){
 			responseData.userInfo={
 				username:userInfo.username,
 				id:userInfo.id
-			}
+			};
+			req.cookies.set("userInfo",JSON.stringify({
+				username:userInfo.username,
+				id:userInfo.id
+			}));
 			res.json(responseData);
+			return;
 		}
 	})
-})
+});
+
+//退出登录
+
+router.post("/user/logOut",function(req,res,next){
+	req.cookies.set("userInfo",null);
+	res.json(responseData);
+});
 
 module.exports = router;

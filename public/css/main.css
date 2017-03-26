@@ -74,7 +74,7 @@ h6 {
 	font-size: 100%;
 	font-weight: normal;
 }
-body{
+.mainBody{
 	background:#eee;
 }
 .text_blue{
@@ -126,7 +126,6 @@ body{
 	width:200px;
 	background:#fff;
 	padding:20px;
-	display: none;
 }
 .title{
 	width:100%;
@@ -183,4 +182,14 @@ body{
 	display: inline-block;
 	width:100%;
 	text-align:center;
+}
+
+/*后台管理*/
+.navLeft .dropdown-menu{
+	min-width:0;
+	width:100px;
+}
+.navRight .dropdown-menu{
+	min-width:0;
+	width:87px;
 }

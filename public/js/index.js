@@ -52,11 +52,21 @@ $(function(){
 			success:function(res){
 				oLogBox.find(".j_promptInfo").html(res.message);
 				if(res.code == "0"){
-					setTimeout(function(){
-						oLogBox.hide();
-						$(".j_userName").html(res.userInfo.username);
-						oUserPanel.show();
-					},1000)
+					window.location.reload();
+				}
+			}
+		})
+	});
+
+	$("#i_logOut").on("click",function(){
+		$.ajax({
+			type:"post",
+			url:"api/user/logOut",
+			data:{},
+			dataType:"json",
+			success:function(res){
+				if(res.code == "0"){
+					window.location.reload();
 				}
 			}
 		})
