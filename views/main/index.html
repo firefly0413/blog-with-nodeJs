@@ -10,13 +10,29 @@
 	<script src="/public/js/jquery-1.12.4.min.js"></script>
 	<script src="/public/js/index.js"></script>
 </head>
-<body>
+<body class="mainBody">
 <div class="header">
 	欢迎来到我的博客
 </div>
 <div class="content">
 	<div class="left_side"></div>
 	<div class="right_side">
+		{% if userInfo.id %}
+		<div class="user_panel" id="i_userPanel">
+			<div class="title">
+				<span>用户信息</span>
+			</div>
+			<p class="j_userName">{{userInfo.username}}</p>
+			{% if userInfo.isAdmin %}
+				<p class="login_text">你好，管理员<br/>
+					<span style="font-size:12px;"><a href="/admin">点击这里</a>进入管理后台</span>
+				</p>
+			{% else %}
+				<p class="login_text">您好，欢迎光临我的博客!</p>
+			{% endif %}
+			<a href="javascript:;" id="i_logOut">退出</a>
+		</div>
+		{% else %}
 		<div class="registBox">
 			<form id="i_regForm">
 				<div class="title">
@@ -57,14 +73,7 @@
 			<p class="prompt_info j_promptInfo"></p>
 			<p>还没有账号？马上去<span class="text_blue j_toReg">注册</span></p>
 		</div>
-		<div class="user_panel" id="i_userPanel">
-			<div class="title">
-				<span>用户信息</span>
-			</div>
-			<p class="j_userName"></p>
-			<p class="login_text">您好，欢迎光临我的博客!</p>
-			<a href="javascript:;">退出</a>
-		</div>
+		{% endif %}
 	</div>
 </div>
 </body>

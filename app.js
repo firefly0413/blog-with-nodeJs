@@ -9,12 +9,37 @@ var swig = require("swig");
 var mongoose = require("mongoose");
 // 加载body-parser,用来处理post提交的数据
 var bodyParser = require("body-parser");
+//加载cookies模块
+var Cookies = require("cookies");
+
+var User = require("./models/user");
 
 // 创建app应用
 var app = express();
 
 //设置静态文件托管  当用户访问的url以/public开始，返回 __dirname + '/public'下的文件
 app.use("/public",express.static( __dirname + '/public'));
+//设置cookies
+app.use(function(req,res,next){
+	req.cookies = new Cookies(req,res);
+
+	//解析用户的cookie信息
+	req.userInfo = {};
+	if(req.cookies.get("userInfo")){
+		try{
+			req.userInfo = JSON.parse(req.cookies.get("userInfo"));
+			//获取当前登录用户类型
+			User.findById(req.userInfo.id).then(function(userInfo){
+				req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
+				next();
+			});
+		}catch(e){
+			next();
+		}
+	}else{
+		next();
+	}
+});
 
 //配置应用模板
 //定义当前应用所使用的的模板引擎
