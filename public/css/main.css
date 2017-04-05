@@ -65,15 +65,6 @@ th {
 	text-align: left;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-size: 100%;
-	font-weight: normal;
-}
 .mainBody{
 	background:#eee;
 }
@@ -192,4 +183,13 @@ h6 {
 .navRight .dropdown-menu{
 	min-width:0;
 	width:87px;
+}
+.myTable thead tr th,.myTable tbody tr td{
+	text-align:center;
+	max-width:300px;
+	line-height:35px;
+}
+.userPanel{
+	width:80%;
+	margin:0 auto;
 }
