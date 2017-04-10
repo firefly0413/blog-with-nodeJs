@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+	<ol class="breadcrumb">
+		<li><a href="/admin">管理首页</a></li>
+		<li><span>分类管理</span></li>
+	</ol>
+	<h3>分类列表</h3>
+<div class="panel userPanel">
+	<div class="panel-body">
+		<table class="table table-striped myTable">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>分类名</th>
+					<th>修改</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for category in categories %}
+					<tr data-id="{{category._id.toString()}}" data-name="{{category.name}}">
+						<td>{{category._id.toString()}}</td>
+						<td>{{category.name}}</td>
+						<td>
+							<button class="btn btn-default j_cat_edit" >修改</button>
+							<button class="btn btn-danger j_cat_remove" >删除</button>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="modal fade" data-id="" id="i_editModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">分类修改</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group clearfix">
+					<label style="text-align: right;font-size:18px;" class="label-control col-sm-4">分类名：</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" id="cat_nameIpt" value="" />
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-default" data-dismiss="modal">取消</button>
+				<button class="btn btn-primary" id="i_confirm">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" data-id="" id="i_removeModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">分类删除</h4>
+			</div>
+			<div class="modal-body">
+				<h4>确定删除该分类吗？</h4>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-default" data-dismiss="modal">取消</button>
+				<button class="btn btn-primary" id="i_confirmRomove">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% include 'pages.html' %}
+
+{% endblock %}

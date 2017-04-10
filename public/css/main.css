@@ -64,7 +64,42 @@ capation,
 th {
 	text-align: left;
 }
+.toast_mask{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1001;
+	background-color: rgba(0, 0, 0, .4);
+	display: none;
+}
+.toast_content{
+	position: fixed;
+	z-index: 1002;
+	top: 50%;
+	left: 50%;
+	margin-left: -130px;
+	margin-top: -27px;
+	width: 240px;
+	line-height: 24px;
+	border-radius: 5px;
+	background: rgba(0, 0, 0, .7);
+	padding: 10px 15px;
+	color: #fff;
+	font-weight: 700;
+	text-align: center;
+	word-break: break-all;
+	display: none;
+}
 
+.clearfix:after{
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
 .mainBody{
 	background:#eee;
 }
@@ -192,4 +227,10 @@ th {
 .userPanel{
 	width:80%;
 	margin:0 auto;
+}
+
+/*分类管理*/
+#form1 label{
+	text-align:right;
+	font-size:18px;
 }
