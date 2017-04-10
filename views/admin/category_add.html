@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+	<ol class="breadcrumb">
+		<li><a href="/admin">管理首页</a></li>
+		<li><span>添加分类</span></li>
+	</ol>
+	<h3>添加分类</h3>
+<div class="panel userPanel" methed="post">
+	<div class="panel-body">
+		<form id="form1">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">分类名称：</label>
+				<div class="col-sm-6">
+					<input class="form-control" id="catName" />
+				</div>
+			</div>
+			<button class="btn btn-default" id="subBtn">提交</button>
+		</form>
+	</div>
+</div>
+
+{% endblock %}
