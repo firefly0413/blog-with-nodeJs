@@ -1,9 +1,14 @@
 var express = require("express");
 var router = express.Router();
+var Category = require("../models/Category");
 
 router.get("/",function(req,res,next){
-	res.render("main/index",{
-		"userInfo":req.userInfo
+
+	Category.find().then(function(cats){
+		res.render("main/index",{
+			"userInfo":req.userInfo,
+			"categories":cats
+		});
 	});
 });
 
