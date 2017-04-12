@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+	<ol class="breadcrumb">
+		<li><a href="/admin">管理首页</a></li>
+		<li><span>添加文章</span></li>
+	</ol>
+	<h3>添加文章</h3>
+<div class="panel panel-default userPanel">
+	<div class="panel-body">
+		<form class="myForm clearfix" id="i_myForm">
+			<div class="form-group clearfix">
+				<label class="col-sm-2 control-label">所属分类：</label>
+				<div class="col-sm-4">
+					<select class="form-control" name="category">
+						{% for cat in categories %}
+							<option value="{{cat._id.toString()}}">{{cat.name}}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="form-group clearfix">
+				<label class="col-sm-2 control-label">文章标题：</label>
+				<div class="col-sm-4">
+					<input type="text" name="title" class="form-control" />
+				</div>
+			</div>
+			<div class="form-group clearfix">
+				<label class="col-sm-2 control-label">文章简介：</label>
+				<div class="col-sm-6">
+					<textarea type="text" name="description" class="form-control" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="form-group clearfix">
+				<label class="col-sm-2 control-label">文章内容：</label>
+				<div class="col-sm-6">
+					<textarea type="text" name="content" class="form-control" rows="10" ></textarea>
+				</div>
+			</div>
+		</form>
+		<div class="col-sm-8 clearfix">
+			<button class="btn btn-default pull-right" id="i_saveArtical">提交</button>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

@@ -47,6 +47,7 @@ header,
 hgroup,
 menu,
 nav,
+img,
 section {
 	margin: 0;
 	padding: 0;
@@ -107,17 +108,10 @@ th {
 	color:#06f;
 	cursor:pointer;
 }
-.header{
-	width:100%;
-	height:100px;
-	background:#fff;
-	font-size:50px;
-	line-height:100px;
-	text-align: center;
-}
 .content{
 	position:relative;
-	width:100%;
+	width:80%;
+	margin:0 auto;
 	height:700px;
 	overflow: hidden;
 }
@@ -209,6 +203,43 @@ th {
 	width:100%;
 	text-align:center;
 }
+/*首页*/
+.menu{
+	width:100%;
+	height:50px;
+	line-height:50px;
+	text-align: center;
+	border-bottom:2px solid #999;
+	background:#fff;
+	box-shadow:4px 4px 4px #ccc;
+}
+.menu a{
+	padding:0 15px;
+	height:50px;
+	display: inline-block;
+	line-height:50px;
+	text-decoration: none;
+	color:#666;
+	font-size:16px;
+}
+.menu a.active{
+	border-bottom:2px solid #f90;
+	color:#f90;
+	background:#fff8e9;
+}
+.menu a:hover{
+	border-bottom:2px solid #f90;
+	color:#f90;
+	background:#fff8e9;
+}
+.header{
+	width:100%;
+	background:#fff;
+	text-align: center;
+}
+.header img{
+	width:100%;
+}
 
 /*后台管理*/
 .navLeft .dropdown-menu{
@@ -232,5 +263,11 @@ th {
 /*分类管理*/
 #form1 label{
 	text-align:right;
+	font-size:18px;
+}
+
+/*文章管理*/
+.myForm label{
+	text-align: right;
 	font-size:18px;
 }
