@@ -52,17 +52,6 @@ app.set("view engine","html");
 //开发模式中，需要取消模板缓存
 swig.setDefaults({cache:false});
 
-// 首页
-// req request 对象
-// res response对象
-//app.get("/",function(req,res,next){
-	//res.send("<h1>欢迎来到我的博客!</h1>")
-	//读取views下的指定文件，解析并返回给客户端
-	//第一个参数：表示模板的文件,相对于views目录
-	//第二个参数：传递给模板使用的数据
-	//res.render("index");
-
-//});
 
 //body-parser设置
 app.use(bodyParser.urlencoded({extended:true}));
@@ -75,12 +64,12 @@ app.use("/",require("./routers/main"));
 
 
 //监听app请求
-mongoose.connect("mongodb://localhost:27017/blog",function(err){
+mongoose.connect("mongodb://luckyzf:erik0413@ds161190.mlab.com:61190/luckyzf",function(err){
 	if(err){
 		console.log(err);
 	}else{
 		console.log("数据库连接成功");
-		app.listen(8081);
+		app.listen(80);
 	}
 });
 
