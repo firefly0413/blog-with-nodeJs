@@ -64,12 +64,23 @@ app.use("/",require("./routers/main"));
 
 
 //监听app请求
-mongoose.connect("mongodb://luckyzf:erik0413@ds161190.mlab.com:61190/luckyzf",function(err){
+//线上
+// mongoose.connect("mongodb://luckyzf:erik0413@ds161190.mlab.com:61190/luckyzf",function(err){
+// 	if(err){
+// 		console.log(err);
+// 	}else{
+// 		console.log("数据库连接成功");
+// 		app.listen(80);
+// 	}
+// });
+
+//本地
+mongoose.connect("mongodb://localhost:27017/blog",function(err){
 	if(err){
 		console.log(err);
 	}else{
 		console.log("数据库连接成功");
-		app.listen(80);
+		app.listen(8081);
 	}
 });
 

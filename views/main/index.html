@@ -29,14 +29,35 @@
 			<div class="articalBlock">
 					<h4 class="art_title">{{artical.title}}</h4>
 					<p class="art_info">
-						<span>添加时间：{{artical.addTime|date("Y-m-d H:i:s",-8*60)}}</span>
-						<span>作者：{{artical.user.username}}</span>
-						<span>阅读量：{{artical.views}}</span>
+						<span>添加时间：<b>{{artical.addTime|date("Y-m-d H:i:s",-8*60)}}</b></span>
+						<span>作者：<b>{{artical.user.username}}</b></span>
+						<span>阅读量：<b>{{artical.views}}</b></span>
+						<span>评论：<b class="comments">10</b></span>
 					</p>
 					<p class="art_desc">简介：{{artical.desc}}</p>
-					<p class="art_cont">{{artical.content}}</p>
+					<button class="btn btn_yel">阅读全文</button>
 			</div>
 		{% endfor %}
+
+		<div class="myPage">
+			<div class="page_left">
+				{% if page<=1 %}
+					<span>没有上一页了</span>
+				{% else %}
+					<a href="?page={{page-1}}">上一页</a>
+				{% endif %}
+			</div>
+			<div class="page_count">
+				{{page}}/{{total_page}}
+			</div>
+			<div class="page_right">
+				{% if page==total_page %}
+					<span>没有下一页了</span>
+				{% else %}
+					<a href="?page={{page+1}}">下一页</a>
+				{% endif %}
+			</div>
+		</div>
 	</div>
 	<div class="right_side">
 		{% if userInfo.id %}
@@ -99,6 +120,6 @@
 	</div>
 </div>
 
-{% include 'pages.html' %}
+
 </body>
 </html>
