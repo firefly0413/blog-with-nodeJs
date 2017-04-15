@@ -15,7 +15,9 @@ $(function(){
 			success:function(res){
 				console.log(res);
 				if(res.code == "0"){
-					showToast("操作成功");
+					showToast("操作成功",function(){
+						window.location = "/admin/category";
+					});
 				}else{
 					showToast(res.message);
 				}
