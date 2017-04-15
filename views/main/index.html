@@ -7,6 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>myBlog</title>
 	<link type="text/css" rel="stylesheet" href="/public/css/main.css" />
+	<link type="text/css" rel="stylesheet" href="/public/css/bootstrap.min.css" />
 	<script src="/public/js/jquery-1.12.4.min.js"></script>
 	<script src="/public/js/index.js"></script>
 </head>
@@ -23,7 +24,20 @@
 	</div>
 </nav>
 <div class="content">
-	<div class="left_side"></div>
+	<div class="left_side">
+		{% for artical in articals %}
+			<div class="articalBlock">
+					<h4 class="art_title">{{artical.title}}</h4>
+					<p class="art_info">
+						<span>添加时间：{{artical.addTime|date("Y-m-d H:i:s",-8*60)}}</span>
+						<span>作者：{{artical.user.username}}</span>
+						<span>阅读量：{{artical.views}}</span>
+					</p>
+					<p class="art_desc">简介：{{artical.desc}}</p>
+					<p class="art_cont">{{artical.content}}</p>
+			</div>
+		{% endfor %}
+	</div>
 	<div class="right_side">
 		{% if userInfo.id %}
 		<div class="user_panel" id="i_userPanel">
@@ -84,5 +98,7 @@
 		{% endif %}
 	</div>
 </div>
+
+{% include 'pages.html' %}
 </body>
 </html>
