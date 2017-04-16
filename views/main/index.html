@@ -17,10 +17,27 @@
 </div>
 <nav>
 	<div class="menu">
-		<a href="/" class="active">首页</a>
-		{% for cat in categories %}
-			<a href="#">{{cat.name}}</a>
-		{% endfor %}
+		{% if (!rel_cat) %}
+
+			<a href="/" class="active">首页</a>
+			{% for cat in categories %}
+				<a href="/?id={{cat._id.toString()}}">{{cat.name}}</a>
+			{% endfor %}
+
+		{% else %}
+			<a href="/">首页</a>
+			{% for cat in categories %}
+				{% if rel_cat==cat._id.toString() %}
+					<a href="/?id={{cat._id.toString()}}" class="active">{{cat.name}}</a>
+				{% else %}
+					<a href="/?id={{cat._id.toString()}}">{{cat.name}}</a>
+				{% endif %}
+
+			{% endfor %}
+
+		{% endif %}
+
+
 	</div>
 </nav>
 <div class="content">
@@ -44,7 +61,7 @@
 				{% if page<=1 %}
 					<span>没有上一页了</span>
 				{% else %}
-					<a href="?page={{page-1}}">上一页</a>
+					<a href="?page={{page-1}}&id={{rel_cat}}">上一页</a>
 				{% endif %}
 			</div>
 			<div class="page_count">
@@ -54,7 +71,7 @@
 				{% if page==total_page %}
 					<span>没有下一页了</span>
 				{% else %}
-					<a href="?page={{page+1}}">下一页</a>
+					<a href="?page={{page+1}}&id={{rel_cat}}">下一页</a>
 				{% endif %}
 			</div>
 		</div>
@@ -68,7 +85,7 @@
 			<p class="j_userName">{{userInfo.username}}</p>
 			{% if userInfo.isAdmin %}
 				<p class="login_text">你好，管理员<br/>
-					<span style="font-size:12px;"><a href="/admin">点击这里</a>进入管理后台</span>
+					<span style="font-size:12px;"><a target="_blank" href="/admin">点击这里</a>进入管理后台</span>
 				</p>
 			{% else %}
 				<p class="login_text">您好，欢迎光临我的博客!</p>
