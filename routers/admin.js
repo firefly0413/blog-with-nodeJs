@@ -320,37 +320,30 @@ router.post("/artical/edit",function(req,res){
 		return;
 	}
 
-	if(!id){
-		responseData.code = "4";
-		responseData.message = "失败，id不能为空!";
-		res.json(responseData);
-		return;
-	}else{
-
-		Artical.findOne({
-			_id:{$ne:id},
-			title:title
-		}).then(function(artical){
-			if(artical){
-				responseData.code = "5";
-				responseData.message = "失败，数据库中已存在同名文章!";
-				res.json(responseData);
-				return Promise.reject();
-			}else{
-				return Artical.update({
-					_id:id
-				},{
-					rel_cat:rel_cat,
-					title:title,
-					desc:desc,
-					content:content
-				});
-			}
-		}).then(function(updatedArt){
-			responseData.message = "编辑成功!";
+	Artical.findOne({
+		_id:{$ne:id},
+		title:title
+	}).then(function(artical){
+		if(artical){
+			responseData.code = "5";
+			responseData.message = "失败，数据库中已存在同名文章!";
 			res.json(responseData);
-		});
-	}
+			return Promise.reject();
+		}else{
+			return Artical.update({
+				_id:id
+			},{
+				rel_cat:rel_cat,
+				title:title,
+				desc:desc,
+				content:content
+			});
+		}
+	}).then(function(updatedArt){
+		responseData.message = "编辑成功!";
+		res.json(responseData);
+	});
+
 });
 
 //删除文章

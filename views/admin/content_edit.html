@@ -15,9 +15,9 @@
 					<select class="form-control" name="category">
 						{% for cat in cats %}
 							{% if (cat.name == artical.rel_cat.name) %}
-								<option value="{{cat.name}}" selected>{{cat.name}}</option>
+								<option value="{{cat._id.toString()}}" selected>{{cat.name}}</option>
 							{% else %}
-								<option value="{{cat.name}}">{{cat.name}}</option>
+								<option value="{{cat._id.toString()}}">{{cat.name}}</option>
 							{% endif %}
 						{% endfor %}
 					</select>
