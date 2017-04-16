@@ -65,24 +65,24 @@ app.use("/",require("./routers/main"));
 
 //监听app请求
 //线上
-// mongoose.connect("mongodb://luckyzf:erik0413@ds161190.mlab.com:61190/luckyzf",function(err){
-// 	if(err){
-// 		console.log(err);
-// 	}else{
-// 		console.log("数据库连接成功");
-// 		app.listen(80);
-// 	}
-// });
-
-//本地
-mongoose.connect("mongodb://localhost:27017/blog",function(err){
+mongoose.connect("mongodb://luckyzf:erik0413@ds161190.mlab.com:61190/luckyzf",function(err){
 	if(err){
 		console.log(err);
 	}else{
 		console.log("数据库连接成功");
-		app.listen(8081);
+		app.listen(80);
 	}
 });
+
+//本地
+// mongoose.connect("mongodb://localhost:27017/blog",function(err){
+// 	if(err){
+// 		console.log(err);
+// 	}else{
+// 		console.log("数据库连接成功");
+// 		app.listen(8081);
+// 	}
+// });
 
 //过程分析
 //用户发送http请求 -> url -> 解析路由 -> 找到匹配规则 -> 执行指定的绑定函数，返回对应内容给用户
