@@ -27,7 +27,7 @@ router.get("/",function(req,res){
 			var skip = (page-1)*limit;
 
 			//从数据库中读取文章列表
-			Artical.where(condition).find().limit(limit).skip(skip).populate("user").then(function(articals){
+			Artical.where(condition).find().limit(limit).skip(skip).populate("user").sort({"addTime":-1}).then(function(articals){
 				res.render("main/index",{
 					"userInfo":req.userInfo,
 					"categories":cats,

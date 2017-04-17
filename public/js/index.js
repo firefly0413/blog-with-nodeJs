@@ -72,4 +72,17 @@ $(function(){
 		})
 	})
 
+	//文章展示模块
+	$(".j_showCont").on("click",function(){
+		$(this).hide();
+		$(this).next(".art_cont").fadeIn();
+		$(this).siblings(".j_hideCont").fadeIn();
+	})
+
+	$(".j_hideCont").on("click",function(){
+		$(this).hide();
+		$(this).prev(".art_cont").fadeOut();
+		$(this).siblings(".j_showCont").fadeIn();
+	})
+
 });

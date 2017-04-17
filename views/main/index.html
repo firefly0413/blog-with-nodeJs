@@ -13,85 +13,50 @@
 </head>
 <body class="mainBody">
 <div class="header">
-	<img src="../../public/images/IMG_0293.jpg" />
-</div>
-<nav>
-	<div class="menu">
-		{% if (!rel_cat) %}
+	<div class="headImg"></div>
+	<nav>
+		<div class="menu">
+			{% if (!rel_cat) %}
 
-			<a href="/" class="active">首页</a>
-			{% for cat in categories %}
-				<a href="/?id={{cat._id.toString()}}">{{cat.name}}</a>
-			{% endfor %}
-
-		{% else %}
-			<a href="/">首页</a>
-			{% for cat in categories %}
-				{% if rel_cat==cat._id.toString() %}
-					<a href="/?id={{cat._id.toString()}}" class="active">{{cat.name}}</a>
-				{% else %}
+				<a href="/" class="active">首页</a>
+				{% for cat in categories %}
 					<a href="/?id={{cat._id.toString()}}">{{cat.name}}</a>
-				{% endif %}
+				{% endfor %}
 
-			{% endfor %}
+			{% else %}
+				<a href="/">首页</a>
+				{% for cat in categories %}
+					{% if rel_cat==cat._id.toString() %}
+						<a href="/?id={{cat._id.toString()}}" class="active">{{cat.name}}</a>
+					{% else %}
+						<a href="/?id={{cat._id.toString()}}">{{cat.name}}</a>
+					{% endif %}
 
-		{% endif %}
+				{% endfor %}
 
-
-	</div>
-</nav>
-<div class="content">
-	<div class="left_side">
-		{% for artical in articals %}
-			<div class="articalBlock">
-					<h4 class="art_title">{{artical.title}}</h4>
-					<p class="art_info">
-						<span>添加时间：<b>{{artical.addTime|date("Y-m-d H:i:s",-8*60)}}</b></span>
-						<span>作者：<b>{{artical.user.username}}</b></span>
-						<span>阅读量：<b>{{artical.views}}</b></span>
-						<span>评论：<b class="comments">10</b></span>
-					</p>
-					<p class="art_desc">简介：{{artical.desc}}</p>
-					<button class="btn btn_yel">阅读全文</button>
-			</div>
-		{% endfor %}
-
-		<div class="myPage">
-			<div class="page_left">
-				{% if page<=1 %}
-					<span>没有上一页了</span>
-				{% else %}
-					<a href="?page={{page-1}}&id={{rel_cat}}">上一页</a>
-				{% endif %}
-			</div>
-			<div class="page_count">
-				{{page}}/{{total_page}}
-			</div>
-			<div class="page_right">
-				{% if page==total_page %}
-					<span>没有下一页了</span>
-				{% else %}
-					<a href="?page={{page+1}}&id={{rel_cat}}">下一页</a>
-				{% endif %}
-			</div>
+			{% endif %}
 		</div>
-	</div>
+	</nav>
+</div>
+
+<div class="content">
+
 	<div class="right_side">
 		{% if userInfo.id %}
-		<div class="user_panel" id="i_userPanel">
-			<div class="title">
-				<span>用户信息</span>
-			</div>
-			<p class="j_userName">{{userInfo.username}}</p>
-			{% if userInfo.isAdmin %}
+			<div class="user_panel" id="i_userPanel">
+				<div class="title">
+					<span>用户信息</span>
+				</div>
+				<p class="j_userName">{{userInfo.username}}</p>
+				{% if userInfo.isAdmin %}
 				<p class="login_text">你好，管理员<br/>
 					<span style="font-size:12px;"><a target="_blank" href="/admin">点击这里</a>进入管理后台</span>
 				</p>
-			{% else %}
+				{% else %}
 				<p class="login_text">您好，欢迎光临我的博客!</p>
-			{% endif %}
-			<a href="javascript:;" id="i_logOut">退出</a>
-		</div>
+				{% endif %}
+				<a href="javascript:;" id="i_logOut">退出</a>
+			</div>
 		{% else %}
 		<div class="registBox">
 			<form id="i_regForm">
@@ -122,11 +87,11 @@
 				</div>
 				<div class="line">
 					<span>用户名：</span>
-					<input type="text" name="username" />
+					<input type="text" name="username" class="form-control" />
 				</div>
 				<div class="line">
 					<span>密码：</span>
-					<input type="password" name="password" />
+					<input type="password" name="password" class="form-control" />
 				</div>
 			</form>
 			<button class="subBtn" id="i_login">登录</button>
@@ -135,8 +100,49 @@
 		</div>
 		{% endif %}
 	</div>
-</div>
 
+	<div class="left_side">
+		{% for artical in articals %}
+			<div class="articalBlock">
+					<h4 class="art_title">{{artical.title}}</h4>
+					<p class="art_info">
+						<span>添加时间：<b>{{artical.addTime|date("Y-m-d H:i:s",-8*60)}}</b></span>
+						<span>作者：<b>{{artical.user.username}}</b></span>
+						<span>阅读量：<b>{{artical.views}}</b></span>
+						<span>评论：<b class="comments">10</b></span>
+					</p>
+					<p class="art_desc">简介：{{artical.desc}}</p>
+					<button class="btn btn_yel j_showCont">阅读全文</button>
+					<div class="art_cont">
+						{% for pg in artical.content %}
+							<p>{{pg}}</p>
+						{% endfor %}
+					</div>
+					<button class="btn btn_yel hideBtn j_hideCont pull-right">收起全文</button>
+			</div>
+		{% endfor %}
+
+		<div class="myPage">
+			<div class="page_left">
+				{% if page<=1 %}
+					<span>没有上一页了</span>
+				{% else %}
+					<a href="?page={{page-1}}&id={{rel_cat}}">上一页</a>
+				{% endif %}
+			</div>
+			<div class="page_count">
+				{{page}}/{{total_page}}
+			</div>
+			<div class="page_right">
+				{% if page==total_page %}
+					<span>没有下一页了</span>
+				{% else %}
+					<a href="?page={{page+1}}&id={{rel_cat}}">下一页</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
 
 </body>
 </html>
