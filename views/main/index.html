@@ -103,7 +103,7 @@
 
 	<div class="left_side">
 		{% for artical in articals %}
-			<div class="articalBlock">
+			<div class="articalBlock" data-id="{{artical._id.toString()}}">
 					<h4 class="art_title">{{artical.title}}</h4>
 					<p class="art_info">
 						<span>添加时间：<b>{{artical.addTime|date("Y-m-d H:i:s",-8*60)}}</b></span>

@@ -3,6 +3,13 @@ var router = express.Router();
 var Category = require("../models/Category");
 var Artical = require("../models/articals");
 
+var responseData={};
+router.use(function(req,res,next){
+	responseData.code = "0";
+	responseData.message = "";
+	next();
+})
+
 router.get("/",function(req,res){
 
 	var limit = 2;
@@ -42,5 +49,30 @@ router.get("/",function(req,res){
 		});
 	});
 });
+
+//文章阅读数
+
+router.post("/artical/read",function(req,res){
+	var id = req.body.id;
+
+	Artical.findOne({_id:id}).then(function(art){
+		if(!art){
+			responseData.code = "1";
+			responseData.message = "数据库中未找到该文章！"
+			res.json(responseData);
+			return Promise.reject();
+		}else{
+			var num = Number(art.views)+1;
+			return Artical.update({
+				_id:id
+			},{
+				views:num
+			})
+		}
+	}).then(function(newArt){
+		responseData.message = "阅读数加1！"
+		res.json(responseData);
+	})
+})
 
 module.exports = router;

@@ -77,6 +77,18 @@ $(function(){
 		$(this).hide();
 		$(this).next(".art_cont").fadeIn();
 		$(this).siblings(".j_hideCont").fadeIn();
+
+		var id = $(this).closest(".articalBlock").data("id");
+
+		$.ajax({
+			url:"/artical/read",
+			type:"post",
+			data:{id:id},
+			dataType:"json",
+			success:function(res){
+				console.log(res);
+			}
+		})
 	})
 
 	$(".j_hideCont").on("click",function(){
