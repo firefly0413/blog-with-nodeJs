@@ -103,6 +103,9 @@ th {
 	clear: both;
 	visibility: hidden;
 }
+.hidden{
+	display: none;
+}
 .mainBody{
 	background:#eee;
 }
@@ -126,7 +129,7 @@ th {
 .right_side{
 	width:30%;
 	height:100%;
-	float: left;
+	float: right;
 }
 .registBox{
 	margin-top:30px;
@@ -149,6 +152,9 @@ th {
 	width:90%;
 	background:#fff;
 	padding:20px;
+}
+.line .form-control{
+	display:inline-block;
 }
 .title{
 	width:100%;
@@ -238,18 +244,27 @@ th {
 }
 .header{
 	width:100%;
-	background:#fff;
+	position:fixed;
+	top:0;
+	z-index:10;
+}
+.content{
+	margin-top:200px;
+}
+.headImg{
+	width:100%;
+	height:150px;
+	background:url("../images/headImg.jpg") no-repeat;
+	background-size:cover;
 	text-align: center;
 }
-.header img{
-	width:100%;
-}
+
 .articalBlock{
 	width:100%;
-	max-height:400px;
 	padding:20px;
 	background:#fff;
 	margin-bottom:20px;
+	overflow: hidden;
 }
 
 .art_title{
@@ -298,6 +313,23 @@ th {
 .myPage div:nth-of-type(3){
 	text-align: right;
 }
+.art_desc{
+	padding-left:30px;
+	text-indent:2em;
+	font-size:13px;
+	color:#666;
+}
+.art_cont{
+	width:100%;
+	padding:3% 5%;
+	display: none;
+}
+.art_cont p{
+	text-indent:2em;
+}
+.articalBlock .hideBtn{
+	display: none;
+}
 
 /*后台管理*/
 .navLeft .dropdown-menu{
@@ -328,4 +360,40 @@ th {
 .myForm label{
 	text-align: right;
 	font-size:18px;
+}
+.operate div{
+	width:35px;
+	height:35px;
+	border:1px solid #999;
+	text-align: center;
+	line-height:35px;
+	border-radius:5px;
+	float: left;
+	font-size:20px;
+	cursor:pointer;
+}
+.operate div:nth-of-type(1){
+	margin-right:20px;
+}
+
+@media screen and (max-width:1024px){
+	.content{
+		width:90%;
+	}
+	.right_side{
+		width:100%;
+		float:none;
+	}
+	.right_side .registBox,.right_side .loginBox,.right_side .user_panel{
+		margin:20px auto;
+	}
+	.left_side{
+		width:100%;
+		float:none;
+		padding-top:0;
+	}
+	.headImg{
+		background:url("../images/headImg2.jpg") no-repeat;
+		background-size:cover;
+	}
 }

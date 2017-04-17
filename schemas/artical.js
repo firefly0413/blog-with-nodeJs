@@ -22,7 +22,10 @@ var artical = new mongoose.Schema({
 	},
 	title:String,
 	desc:String,
-	content:String
+	content:{
+		type:Array,
+		default:[]
+	}
 });
 
 module.exports = artical;

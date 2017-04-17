@@ -93,6 +93,30 @@ $(function(){
 	var saveBtn = $("#i_saveArtical");
 	var myForm = $("#i_myForm");
 
+	//添加段落
+	function addPg(name){
+		this.addBtn = $(name).find(".j_plus");
+		this.removeBtn = $(name).find(".j_minus");
+		this.addBtn.off().on("click",this.fnAdd);
+		this.removeBtn.off().on("click",this.fnRemove);
+	}
+
+	addPg.prototype.fnAdd = function(){
+		var parent = $(this).closest(".form-group");
+		var newPg = parent.clone();
+		newPg.find("textArea").val("");
+		newPg.insertAfter(parent);
+		new addPg(".j_paragraph");
+	}
+
+	addPg.prototype.fnRemove = function(){
+		$(this).closest(".form-group").remove();
+	}
+
+	new addPg(".j_paragraph");
+
+
+
 	saveBtn.on("click",function(){
 		var str = decodeURI(myForm.serialize().toString());
 		var param = getJson(str);
@@ -102,6 +126,14 @@ $(function(){
 			param.id = id;
 			url = "/admin/artical/edit";
 		}
+
+		//文章段落
+		var arr=[];
+		$(".j_content").find(".j_paragraph").each(function(index,item){
+			var value = $(item).find("textArea").val();
+			arr.push(value);
+		})
+		param.content = arr;
 
 		$.ajax({
 			url:url,
