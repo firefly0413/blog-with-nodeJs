@@ -331,6 +331,66 @@ th {
 	display: none;
 }
 
+/*留言*/
+.dividLine{
+	width:100%;
+	height:1px;
+	border-bottom:1px solid #ddd;
+	margin:15px 0;
+}
+.comment_area{
+	overflow: hidden;
+}
+.writeComment{
+	color:#09f;
+	font-size:15px;
+	cursor:pointer;
+}
+.writeBox{
+	margin:15px 0;
+}
+.writeBox .subComment{
+	padding:5px 20px;
+	margin-top:10px;
+}
+.comments_box{
+	width:100%;
+}
+.comment_item{
+	width:100%;
+	position:relative;
+	overflow: hidden;
+}
+.comment_left{
+	float: left;
+	width:10%;
+}
+.user_face{
+	width:80%;
+}
+.user_face img{
+	width:100%;
+}
+.comment_cont{
+	width:90%;
+	float: left;
+}
+.comment_cont p:nth-of-type(1){
+	color:#666;
+}
+.comment_cont p:nth-of-type(3){
+	font-size:13px;
+	color:#666;
+}
+.com_approve{
+	position:absolute;
+	right:10px;
+	top:0;
+}
+.comment_area p{
+	text-indent: 0;
+}
+
 /*后台管理*/
 .navLeft .dropdown-menu{
 	min-width:0;
