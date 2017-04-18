@@ -99,7 +99,7 @@ router.post("/comment/add",function(req,res){
 		}).then(function(user){
 			if(!user){
 				responseData.code="2";
-				responseData.message = "查无此人！";
+				responseData.message = "您还没有登录，请先登录！";
 				res.json(responseData);
 				return Promise.reject();
 			}else{
@@ -111,8 +111,11 @@ router.post("/comment/add",function(req,res){
 				return comment.save();
 			}
 		}).then(function(newComment){
- 			responseData.message = "添加评论成功！";
-			res.json(responseData);
+			Comment.where({art_id:artId}).find().populate("user").then(function(comments){
+				responseData.data = comments;
+				responseData.message = "添加评论成功！";
+				res.json(responseData);
+			})
 		})
 	}
 });

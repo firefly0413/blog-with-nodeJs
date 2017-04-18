@@ -348,16 +348,28 @@ th {
 }
 .writeBox{
 	margin:15px 0;
+	display: none;
 }
 .writeBox .subComment{
 	padding:5px 20px;
 	margin-top:10px;
+}
+.writeBox textarea{
+	width:100%;
+}
+.com_approve{
+	cursor:pointer;
+	color:#999;
+}
+.com_approve.active{
+	color:#000;
 }
 .comments_box{
 	width:100%;
 }
 .comment_item{
 	width:100%;
+	margin-top:10px;
 	position:relative;
 	overflow: hidden;
 }

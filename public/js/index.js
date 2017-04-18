@@ -88,7 +88,7 @@ $(function(){
 			dataType:"json",
 			success:function(res){
 				if(res.data && res.data.length>0){
-					var arr = res.data;
+					var arr = res.data.reverse();
 					for(var i=0;i<arr.length;i++){
 						var html = '<div class="comment_item">\
 					<div class="comment_left">\
@@ -103,9 +103,13 @@ $(function(){
 						</div>\
 						<div class="com_approve">\
 							<b class="glyphicon glyphicon-thumbs-up"></b>\
-							<span>14</span>\
+							<span>'+arr[i].approve+'</span>\
 							</div>\
 							</div>';
+						$(".j_doApprove").off().on("click",function(){
+							var id = $(this).closest(".comment_item").data("id");
+							console.log(id);
+						})
 
 						_this.next(".art_cont").find(".comments_box").append(html);
 					}
@@ -122,11 +126,15 @@ $(function(){
 
 	//写评论
 	var subBtn = $(".j_subComment");
+	$(".j_writeSth").on("click",function(){
+		$(this).parent().next(".writeBox").css("display","block");
+	});
 
 	subBtn.on("click",function(){
+		var _this = $(this);
 		var value = $(this).closest(".writeBox").find("textArea").val();
 		var art_id = $(this).closest(".articalBlock").data("id");
-		console.log(value);
+
 		$.ajax({
 			url:"comment/add",
 			type:"post",
@@ -138,14 +146,51 @@ $(function(){
 			success:function(res){
 				if(res.code == "0"){
 					showToast("评论成功",function(){
-						//window.location.reload();
+						_this.closest(".writeBox").css("display","none");
+						_this.prev("textarea").val("");
+						if(res.data && res.data.length>0){
+							_this.closest(".writeBox").next(".comments_box").html("");
+							var arr = res.data.reverse();
+							for(var i=0;i<arr.length;i++){
+								var html = '<div class="comment_item" data-id="'+arr[i]._id.toString()+'">\
+					<div class="comment_left">\
+							<div class="user_face">\
+							<img src="../../public/images/face.jpg" />\
+							</div>\
+							</div>\
+							<div class="comment_cont">\
+							<p>'+arr[i].user.username+'</p>\
+							<p>'+arr[i].value+'</p>\
+						<p>'+arr[i].addTime+'</p>\
+						</div>\
+						<div class="com_approve j_doApprove">\
+							<b class="glyphicon glyphicon-thumbs-up"></b>\
+							<span>'+arr[i].approve+'</span>\
+							</div>\
+							</div>';
+
+								$(".j_doApprove").off().on("click",function(){
+									var id = $(this).closest(".comment_item").data("id");
+									console.log(id);
+								})
+								_this.closest(".writeBox").next(".comments_box").append(html);
+							}
+						}
 					});
 				}else{
 					showToast(res.message);
 				}
 			}
 		})
-	})
+	});
+
+	//点赞
+	function doApprove(className){
+		$(className).off().on("click",function(){
+			var id = $(this).closest(".comment_item").data("id");
+			console.log(id);
+		})
+	}
 
 });
 
