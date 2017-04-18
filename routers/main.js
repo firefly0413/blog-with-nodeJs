@@ -2,13 +2,15 @@ var express = require("express");
 var router = express.Router();
 var Category = require("../models/Category");
 var Artical = require("../models/articals");
+var User = require("../models/User");
+var Comment = require("../models/Comment");
 
 var responseData={};
 router.use(function(req,res,next){
 	responseData.code = "0";
 	responseData.message = "";
 	next();
-})
+});
 
 router.get("/",function(req,res){
 
@@ -58,7 +60,7 @@ router.post("/artical/read",function(req,res){
 	Artical.findOne({_id:id}).then(function(art){
 		if(!art){
 			responseData.code = "1";
-			responseData.message = "数据库中未找到该文章！"
+			responseData.message = "数据库中未找到该文章！";
 			res.json(responseData);
 			return Promise.reject();
 		}else{
@@ -70,9 +72,49 @@ router.post("/artical/read",function(req,res){
 			})
 		}
 	}).then(function(newArt){
-		responseData.message = "阅读数加1！"
+		//显示评论
+		Comment.where({art_id:id}).find().populate("user").then(function(comments){
+			responseData.data = comments;
+			responseData.message = "阅读数加1！";
+			res.json(responseData);
+		})
+
+	});
+
+});
+
+//写评论
+router.post("/comment/add",function(req,res){
+	var artId = req.body.art_id;
+	var value = req.body.value;
+
+	if(!req.userInfo){
+		responseData.code="1";
+		responseData.message = "只有先登陆才可以评论！";
 		res.json(responseData);
-	})
-})
+	}else{
+		var userId = req.userInfo.id;
+		User.findOne({
+			_id:userId
+		}).then(function(user){
+			if(!user){
+				responseData.code="2";
+				responseData.message = "查无此人！";
+				res.json(responseData);
+				return Promise.reject();
+			}else{
+				var comment = new Comment({
+					art_id:artId,
+					user:userId,
+					value:value
+				});
+				return comment.save();
+			}
+		}).then(function(newComment){
+ 			responseData.message = "添加评论成功！";
+			res.json(responseData);
+		})
+	}
+});
 
 module.exports = router;

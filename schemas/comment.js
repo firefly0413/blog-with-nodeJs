@@ -1,12 +1,12 @@
 var mongoose = require("mongoose");
 
-var artical = new mongoose.Schema({
+var comment = new mongoose.Schema({
 	//关联字段-文章分类Id
-	rel_cat:{
+	art_id:{
 		//类型
 		type:mongoose.Schema.Types.ObjectId,
 		//引用一个表
-		ref:'Category'
+		ref:'Artical'
 	},
 	user:{
 		type:mongoose.Schema.Types.ObjectId,
@@ -16,20 +16,12 @@ var artical = new mongoose.Schema({
 		type:Date,
 		default:new Date
 	},
-	views:{
+	value:String,
+	authorReply:String,
+	approve:{
 		type:Number,
 		default:0
-	},
-	title:String,
-	desc:String,
-	content:{
-		type:Array,
-		default:[]
-	},
-	comments:{
-		type:Array,
-		default:[]
 	}
 });
 
-module.exports = artical;
+module.exports = comment;
