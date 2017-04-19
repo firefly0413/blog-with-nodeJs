@@ -3,7 +3,7 @@ var router = express.Router();
 var Category = require("../models/Category");
 var Artical = require("../models/articals");
 var User = require("../models/user");
-var Comment = require("../models/Comment");
+var Comment = require("../models/comment");
 
 var responseData={};
 router.use(function(req,res,next){
