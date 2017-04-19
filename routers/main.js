@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Category = require("../models/Category");
 var Artical = require("../models/articals");
-var User = require("../models/User");
+var User = require("../models/user");
 var Comment = require("../models/Comment");
 
 var responseData={};
