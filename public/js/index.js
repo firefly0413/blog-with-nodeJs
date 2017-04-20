@@ -90,6 +90,8 @@ $(function(){
 				if(res.data && res.data.length>0){
 					var arr = res.data.reverse();
 					for(var i=0;i<arr.length;i++){
+						//处理时间格式
+						var addTime = getTime(arr[i].addTime);
 						var html = '<div class="comment_item">\
 					<div class="comment_left">\
 							<div class="user_face">\
@@ -152,22 +154,24 @@ $(function(){
 							_this.closest(".writeBox").next(".comments_box").html("");
 							var arr = res.data.reverse();
 							for(var i=0;i<arr.length;i++){
+								//处理时间格式
+								var addTime = getTime(arr[i].addTime);
 								var html = '<div class="comment_item" data-id="'+arr[i]._id.toString()+'">\
-					<div class="comment_left">\
-							<div class="user_face">\
-							<img src="../../public/images/face.jpg" />\
-							</div>\
-							</div>\
-							<div class="comment_cont">\
-							<p>'+arr[i].user.username+'</p>\
-							<p>'+arr[i].value+'</p>\
-						<p>'+arr[i].addTime+'</p>\
-						</div>\
-						<div class="com_approve j_doApprove">\
-							<b class="glyphicon glyphicon-thumbs-up"></b>\
-							<span>'+arr[i].approve+'</span>\
-							</div>\
-							</div>';
+								<div class="comment_left">\
+									<div class="user_face">\
+									<img src="../../public/images/face.jpg" />\
+									</div>\
+									</div>\
+									<div class="comment_cont">\
+									<p>'+arr[i].user.username+'</p>\
+									<p>'+arr[i].value+'</p>\
+								<p>'+arr[i].addTime+'</p>\
+								</div>\
+								<div class="com_approve j_doApprove">\
+									<b class="glyphicon glyphicon-thumbs-up"></b>\
+									<span>'+arr[i].approve+'</span>\
+									</div>\
+									</div>';
 
 								$(".j_doApprove").off().on("click",function(){
 									var id = $(this).closest(".comment_item").data("id");
@@ -203,4 +207,11 @@ function showToast(msg,callback){
 		if (callback && Object.prototype.toString.call(callback) === '[object Function]')
 			callback.apply();
 	}, 1500);
+}
+
+function getTime(str){
+	var date = new Date(str);
+	var y = date.getFullYear(),m = date.getMonth()+1,d = date.getDate(),h = date.getHours(),M = date.getMinutes();
+	var time = y+"-"+ (m<10?"0"+m:m) +"-"+ (d<10?"0"+d:d) +" "+ (h<10?"0"+h:h) +":"+ (M<10?"0"+M:M);
+	return time;
 }
