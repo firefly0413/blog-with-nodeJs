@@ -26,8 +26,9 @@ app.use(function(req,res,next){
 	//解析用户的cookie信息
 	req.userInfo = {};
 	if(req.cookies.get("userInfo")){
+		var str = new Buffer(req.cookies.get("userInfo"), 'base64').toString();
 		try{
-			req.userInfo = JSON.parse(req.cookies.get("userInfo"));
+			req.userInfo = JSON.parse(str);
 			//获取当前登录用户类型
 			User.findById(req.userInfo.id).then(function(userInfo){
 				req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
@@ -75,7 +76,7 @@ mongoose.connect("mongodb://luckyzf:erik0413@ds161190.mlab.com:61190/luckyzf",fu
 });
 
 //本地
-// mongoose.connect("mongodb://localhost:27017/blog",function(err){
+// mongoose.connect("mongodb://localhost:27018/blog",function(err){
 // 	if(err){
 // 		console.log(err);
 // 	}else{

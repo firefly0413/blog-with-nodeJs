@@ -110,12 +110,13 @@ router.post("/user/login",function(req,res,next){
 				username:userInfo.username,
 				id:userInfo.id
 			};
-			req.cookies.set("userInfo",JSON.stringify({
+			var str = JSON.stringify({
 				username:userInfo.username,
 				id:userInfo.id
-			}));
+			});
+			//解决中文乱码问题，使用base64转码
+			req.cookies.set("userInfo",new Buffer(str).toString('base64'));
 			res.json(responseData);
-			return;
 		}
 	})
 });
