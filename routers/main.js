@@ -120,4 +120,24 @@ router.post("/comment/add",function(req,res){
 	}
 });
 
+//点赞操作
+router.post("/comment/approve",function(req,res){
+	var id = req.body.id;
+	var type = req.body.type;
+
+	Comment.findOne({_id:id}).then(function(comment){
+		if(type == "add") {
+			count = Number(comment.approve) + 1;
+		}else if(type=="plus"){
+			count = Number(comment.approve)-1;
+		}
+		return count;
+	}).then(function(count){
+		return Comment.update({_id:id},{approve:count});
+	}).then(function(newComment){
+		responseData.message = "操作成功";
+		res.json(responseData);
+	})
+});
+
 module.exports = router;

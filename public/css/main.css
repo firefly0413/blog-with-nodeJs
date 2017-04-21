@@ -359,11 +359,14 @@ th {
 }
 .com_approve{
 	cursor:pointer;
+	position:absolute;
+	right:10px; top:0;
 	color:#999;
 }
 .com_approve.active{
-	color:#000;
+	color:#5cb85c;
 }
+
 .comments_box{
 	width:100%;
 }
@@ -394,11 +397,7 @@ th {
 	font-size:13px;
 	color:#666;
 }
-.com_approve{
-	position:absolute;
-	right:10px;
-	top:0;
-}
+
 .comment_area p{
 	text-indent: 0;
 }
