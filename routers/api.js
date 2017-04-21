@@ -62,9 +62,12 @@ router.post("/user/register",function(req,res,next){
 			return;
 		}
 		//没有该记录则保存至数据库中
+		var num = 1+Math.round(Math.random()*14);
+		var str = "../../public/images/"+num+".jpg";
 		var user = new User({
 			username:username,
-			password:password
+			password:password,
+			userFace:str
 		});
 		return user.save();
 	}).then(function(newUserInfo){
