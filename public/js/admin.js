@@ -97,13 +97,17 @@ $(function(){
 	function addPg(name){
 		this.addBtn = $(name).find(".j_plus");
 		this.removeBtn = $(name).find(".j_minus");
+		this.addCode = $(name).find(".j_code");
 		this.addBtn.off().on("click",this.fnAdd);
 		this.removeBtn.off().on("click",this.fnRemove);
+		this.addCode.off().on("click",this.fnAddCode);
 	}
 
 	addPg.prototype.fnAdd = function(){
 		var parent = $(this).closest(".form-group");
 		var newPg = parent.clone();
+		newPg.removeClass("j_code");
+		newPg.find("label").text("段落：");
 		newPg.find("textArea").val("");
 		newPg.insertAfter(parent);
 		new addPg(".j_paragraph");
@@ -111,7 +115,17 @@ $(function(){
 
 	addPg.prototype.fnRemove = function(){
 		$(this).closest(".form-group").remove();
-	}
+	};
+
+	addPg.prototype.fnAddCode = function(){
+		var parent = $(this).closest(".form-group");
+		var newPg = parent.clone();
+		newPg.addClass("j_code");
+		newPg.find("label").text("代码：");
+		newPg.find("textArea").val("");
+		newPg.insertAfter(parent);
+		new addPg(".j_paragraph");
+	};
 
 	new addPg(".j_paragraph");
 
@@ -131,7 +145,15 @@ $(function(){
 		var arr=[];
 		$(".j_content").find(".j_paragraph").each(function(index,item){
 			var value = $(item).find("textArea").val();
-			arr.push(value);
+			var obj={};
+			if($(item).hasClass("j_code")){
+				obj.type = "code";
+				obj.value = value;
+			}else{
+				obj.type = "text";
+				obj.value = value;
+			}
+			arr.push(obj);
 		})
 		param.content = arr;
 

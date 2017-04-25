@@ -115,7 +115,13 @@
 				<button class="btn btn_yel j_showCont">阅读全文</button>
 				<div class="art_cont">
 					{% for pg in artical.content %}
-						<p>{{pg}}</p>
+						{% if pg.type == "code" %}
+							<pre>
+								<code class="codeStyle">{{pg.value}}</code>
+							</pre>
+						{% else %}
+							<p>{{pg.value || pg}}</p>
+						{% endif %}
 					{% endfor %}
 					<div class="dividLine"></div>
 					<div class="comment_area">
