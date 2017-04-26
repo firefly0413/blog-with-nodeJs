@@ -37,9 +37,9 @@
 			</div>
 			<div class="contentBox j_content">
 				{% for paragraph in artical.content %}
-					{% if paragraph.type=="text" %}
+					{% if paragraph.type=="code" %}
 						<div class="form-group clearfix j_paragraph">
-							<label class="col-sm-2 control-label">段落：</label>
+							<label class="col-sm-2 control-label">代码：</label>
 							<div class="col-sm-6">
 								<textarea type="text" name="" class="form-control" rows="5" >{{paragraph.value}}</textarea>
 							</div>
@@ -51,9 +51,9 @@
 						</div>
 					{% else %}
 						<div class="form-group clearfix j_paragraph">
-							<label class="col-sm-2 control-label">代码：</label>
+							<label class="col-sm-2 control-label">段落：</label>
 							<div class="col-sm-6">
-								<textarea type="text" name="" class="form-control" rows="5" >{{paragraph.value}}</textarea>
+								<textarea type="text" name="" class="form-control" rows="5" >{{paragraph.value || paragraph}}</textarea>
 							</div>
 							<div class="col-sm-3 operate">
 								<div class="j_plus">+</div>
