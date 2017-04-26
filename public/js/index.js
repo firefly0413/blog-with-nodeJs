@@ -93,6 +93,7 @@ $(function(){
 					for(var i=0;i<arr.length;i++){
 						var html = getHtml(arr[i]);
 						_this.next(".art_cont").find(".comments_box").append(html);
+						addEvent();
 					}
 				}
 			}
@@ -139,6 +140,7 @@ $(function(){
 							for(var i=0;i<arr.length;i++){
 								var html = getHtml(arr[i]);
 								_this.closest(".writeBox").next(".comments_box").append(html);
+								addEvent();
 							}
 						}
 					});
@@ -154,22 +156,27 @@ $(function(){
 		//处理时间格式
 		var addTime = getTime(item.addTime);
 		var html = '<div class="comment_item" data-id="'+ item._id.toString() +'">\
-			<div class="comment_left">\
+				<div class="comment_left">\
 					<div class="user_face">\
-					<img src='+item.user.userFace+' />\
+						<img src='+item.user.userFace+' />\
 					</div>\
-					</div>\
-					<div class="comment_cont">\
+				</div>\
+				<div class="comment_cont">\
 					<p>'+item.user.username+'</p>\
 					<p>'+item.value+'</p>\
-				<p>'+addTime+'</p>\
+					<p>'+addTime+'</p>\
 				</div>\
 				<div class="com_approve j_doApprove">\
 					<b class="glyphicon glyphicon-thumbs-up"></b>\
 					<span>'+item.approve+'</span>\
-					</div>\
-					</div>';
-		//绑定点赞功能
+				</div>\
+			</div>';
+
+		return html;
+	}
+
+	//绑定点赞功能
+	function addEvent(){
 		$(".j_doApprove").off().on("click",function(){
 			var id = $(this).closest(".comment_item").data("id");
 			var bool = $(this).hasClass("active");
@@ -185,8 +192,6 @@ $(function(){
 			//发起点赞请求
 			doApprove(id,bool);
 		});
-
-		return html;
 	}
 
 	//发起点赞请求
