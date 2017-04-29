@@ -14,7 +14,7 @@ router.use(function(req,res,next){
 
 router.get("/",function(req,res){
 
-	var limit = 2;
+	var limit = 5;
 	var page = Number(req.query.page||1);
 	var total_page = 0;
 

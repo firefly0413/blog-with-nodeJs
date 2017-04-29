@@ -105,7 +105,7 @@
 	<div class="left_side">
 		{% for artical in articals %}
 			<div class="articalBlock" data-id="{{artical._id.toString()}}">
-				<h4 class="art_title">{{artical.title}}</h4>
+				<h3 class="art_title">{{artical.title}}</h3>
 				<p class="art_info">
 					<span>添加时间：<b>{{artical.addTime|date("Y-m-d",-8*60)}}</b></span>
 					<span>作者：<b>{{artical.user.username}}</b></span>
@@ -119,6 +119,12 @@
 							<pre>
 								<code class="codeStyle">{{pg.value}}</code>
 							</pre>
+						{% elif pg.type == "title" %}
+							<h4 class="vTitle">{{pg.value}}</h4>
+						{% elif pg.type == "img" %}
+							<div class="imgBox">
+								<img src="{{pg.value}}" />
+							</div>
 						{% else %}
 							<p>{{pg.value || pg}}</p>
 						{% endif %}

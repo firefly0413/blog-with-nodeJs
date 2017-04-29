@@ -280,7 +280,20 @@ th {
 .art_title{
 	text-align: center;
 	line-height:40px;
-	font-size:20px;
+	font-size:26px;
+}
+.vTitle{
+	font-size:22px;
+	line-height:40px;
+	border-bottom:1px dotted #ccc;
+}
+.imgBox{
+	width:100%;
+	margin:15px 0;
+}
+.imgBox img{
+	display: block;
+	max-width: 100%;
 }
 
 .art_info{
@@ -452,11 +465,10 @@ th {
 	float: left;
 	font-size:20px;
 	cursor:pointer;
-	margin-right:20px;
+	margin-right:10px;
+	margin-bottom:10px;
 }
-.operate div:nth-of-type(3){
-	margin-right:0;
-}
+
 
 @media screen and (max-width:1024px){
 	.content{
