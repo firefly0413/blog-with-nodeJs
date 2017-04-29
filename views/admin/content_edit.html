@@ -37,31 +37,39 @@
 			</div>
 			<div class="contentBox j_content">
 				{% for paragraph in artical.content %}
-					{% if paragraph.type=="code" %}
-						<div class="form-group clearfix j_paragraph">
-							<label class="col-sm-2 control-label">代码：</label>
-							<div class="col-sm-6">
-								<textarea type="text" name="" class="form-control" rows="5" >{{paragraph.value}}</textarea>
-							</div>
-							<div class="col-sm-3 operate">
-								<div class="j_plus">+</div>
-								<div class="j_minus">-</div>
-								<div class="j_code">c</div>
-							</div>
-						</div>
-					{% else %}
+					{% if paragraph.type=="text" %}
 						<div class="form-group clearfix j_paragraph">
 							<label class="col-sm-2 control-label">段落：</label>
 							<div class="col-sm-6">
 								<textarea type="text" name="" class="form-control" rows="5" >{{paragraph.value || paragraph}}</textarea>
 							</div>
-							<div class="col-sm-3 operate">
-								<div class="j_plus">+</div>
-								<div class="j_minus">-</div>
-								<div class="j_code">c</div>
+					{% elif paragraph.type=="code" %}
+						<div class="form-group clearfix j_paragraph j_code">
+							<label class="col-sm-2 control-label">代码：</label>
+							<div class="col-sm-6">
+								<textarea type="text" name="" class="form-control" rows="5" >{{paragraph.value}}</textarea>
 							</div>
-						</div>
+					{% elif paragraph.type=="title" %}
+						<div class="form-group clearfix j_paragraph j_vtitle">
+							<label class="col-sm-2 control-label">小标题：</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" value="{{paragraph.value}}" />
+							</div>
+					{% else %}
+						<div class="form-group clearfix j_paragraph j_vimg">
+							<label class="col-sm-2 control-label">图片：</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" value="{{paragraph.value}}" />
+							</div>
 				   {% endif %}
+						<div class="col-sm-3 operate">
+							<div class="j_plus">+</div>
+							<div class="j_minus">-</div>
+							<div class="j_code">c</div>
+							<div class="j_title">t</div>
+							<div class="j_img">i</div>
+						</div>
+					</div>
 				{% endfor %}
 			</div>
 		</form>

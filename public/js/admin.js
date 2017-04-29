@@ -98,31 +98,61 @@ $(function(){
 		this.addBtn = $(name).find(".j_plus");
 		this.removeBtn = $(name).find(".j_minus");
 		this.addCode = $(name).find(".j_code");
+		this.addTitle = $(name).find(".j_title");
+		this.addImg = $(name).find(".j_img");
+
 		this.addBtn.off().on("click",this.fnAdd);
 		this.removeBtn.off().on("click",this.fnRemove);
 		this.addCode.off().on("click",this.fnAddCode);
+		this.addTitle.off().on("click",this.fnAddTile);
+		this.addImg.off().on("click",this.fnAddImg);
 	}
 
+	//添加段落
 	addPg.prototype.fnAdd = function(){
 		var parent = $(this).closest(".form-group");
 		var newPg = parent.clone();
-		newPg.removeClass("j_code");
+		newPg.attr("class","form-group clearfix j_paragraph");
 		newPg.find("label").text("段落：");
-		newPg.find("textArea").val("");
+		newPg.find(".col-sm-6").html("<textarea type='text' class='form-control' rows='5' ></textarea>");
 		newPg.insertAfter(parent);
 		new addPg(".j_paragraph");
-	}
+	};
 
+	//删除段落
 	addPg.prototype.fnRemove = function(){
 		$(this).closest(".form-group").remove();
 	};
 
+	//添加代码
 	addPg.prototype.fnAddCode = function(){
 		var parent = $(this).closest(".form-group");
 		var newPg = parent.clone();
-		newPg.addClass("j_code");
+		newPg.attr("class","form-group clearfix j_paragraph j_code");
 		newPg.find("label").text("代码：");
-		newPg.find("textArea").val("");
+		newPg.find(".col-sm-6").html("<textarea type='text' class='form-control' rows='5' ></textarea>");
+		newPg.insertAfter(parent);
+		new addPg(".j_paragraph");
+	};
+
+	//添加小标题
+	addPg.prototype.fnAddTile = function(){
+		var parent = $(this).closest(".form-group");
+		var newPg = parent.clone();
+		newPg.attr("class","form-group clearfix j_paragraph j_vtitle");
+		newPg.find("label").text("小标题：");
+		newPg.find(".col-sm-6").html("<input type='text' class='form-control' />");
+		newPg.insertAfter(parent);
+		new addPg(".j_paragraph");
+	};
+
+	//添加图片
+	addPg.prototype.fnAddImg = function(){
+		var parent = $(this).closest(".form-group");
+		var newPg = parent.clone();
+		newPg.attr("class","form-group clearfix j_paragraph j_vimg");
+		newPg.find("label").text("图片：");
+		newPg.find(".col-sm-6").html("<input type='text' class='form-control' />");
 		newPg.insertAfter(parent);
 		new addPg(".j_paragraph");
 	};
@@ -130,7 +160,7 @@ $(function(){
 	new addPg(".j_paragraph");
 
 
-
+	//保存
 	saveBtn.on("click",function(){
 		var str = decodeURI(myForm.serialize().toString());
 		var param = getJson(str);
@@ -144,19 +174,22 @@ $(function(){
 		//文章段落
 		var arr=[];
 		$(".j_content").find(".j_paragraph").each(function(index,item){
-			var value = $(item).find("textArea").val();
+			var value = $(item).find("[type='text']").val();
 			var obj={};
 			if($(item).hasClass("j_code")){
 				obj.type = "code";
-				obj.value = value;
+			}else if($(item).hasClass("j_vtitle")){
+				obj.type = "title";
+			}else if($(item).hasClass("j_vimg")){
+				obj.type = "img";
 			}else{
 				obj.type = "text";
-				obj.value = value;
 			}
+			obj.value = value;
 			arr.push(obj);
-		})
+		});
 		param.content = arr;
-
+		console.log(param);
 		$.ajax({
 			url:url,
 			type:"post",
