@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+			content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>飞马里奥</title>
+	<link href="/public/images/face.jpg" rel="shortcut icon" />
+	<link type="text/css" rel="stylesheet" href="/public/css/main.css" />
+	<link type="text/css" rel="stylesheet" href="/public/css/bootstrap.min.css" />
+	<script src="/public/js/jquery-1.12.4.min.js"></script>
+	<script src="/public/js/index.js"></script>
+	<script src="/public/js/artical.js"></script>
+</head>
+<body class="mainBody">
+<div class="headerBg"></div>
+<div class="header">
+	<div class="headerCont">
+		<h2>zhengfei's blog</h2>
+		<h4>lucky!!!</h4>
+	</div>
+</div>
+<div class="myMain clearfix">
+	<nav class="navbar navbar-default myNav">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="navbar-header">
+						<p class="navbar-toggle collapsed myIcon" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</p>
+					</div>
+					<div class="collapse navbar-collapse" id="main-menu">
+						<ul class="nav navbar-nav">
+							{% if (!rel_cat) %}
+								<li><a href="/" class="active">首页</a></li>
+								{% for cat in categories %}
+									<li><a href="/?id={{cat._id.toString()}}">{{cat.name}}</a></li>
+								{% endfor %}
+
+							{% else %}
+								<li><a href="/">首页</a></li>
+								{% for cat in categories %}
+									{% if rel_cat==cat._id.toString() %}
+										<li><a href="/?id={{cat._id.toString()}}" class="active">{{cat.name}}</a></li>
+									{% else %}
+										<li><a href="/?id={{cat._id.toString()}}">{{cat.name}}</a></li>
+									{% endif %}
+								{% endfor %}
+
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div class="content">
+
+		<div class="right_side">
+			{% if userInfo.id %}
+			<div class="user_panel" id="i_userPanel">
+				<div class="title">
+					<span>用户信息</span>
+				</div>
+				<p class="j_userName">{{userInfo.username}}</p>
+				{% if userInfo.isAdmin %}
+				<p class="login_text">你好，管理员<br/>
+					<span style="font-size:12px;"><a target="_blank" href="/admin">点击这里</a>进入管理后台</span>
+				</p>
+				{% else %}
+				<p class="login_text">您好，欢迎光临我的博客!</p>
+				{% endif %}
+				<a href="javascript:;" id="i_logOut">退出</a>
+			</div>
+			{% else %}
+			<div class="registBox">
+				<form id="i_regForm">
+					<div class="title">
+						<span>注册</span>
+					</div>
+					<div class="line">
+						<span>用户名：</span>
+						<input type="text" name="username" class="form-control" />
+					</div>
+					<div class="line">
+						<span>密码：</span>
+						<input type="password" name="password" class="form-control" />
+					</div>
+					<div class="line">
+						<span>确认密码：</span>
+						<input type="password" name="confirmword" class="form-control" />
+					</div>
+				</form>
+				<button class="subBtn" id="i_regist">注册</button>
+				<p class="prompt_info j_promptInfo"></p>
+				<p>已经有账号了？马上去<span class="text_blue j_toLogin">登录</span></p>
+			</div>
+			<div class="loginBox">
+				<form id="i_logForm">
+					<div class="title">
+						<span>登录</span>
+					</div>
+					<div class="line">
+						<span>用户名：</span>
+						<input type="text" name="username" class="form-control" />
+					</div>
+					<div class="line">
+						<span>密码：</span>
+						<input type="password" name="password" class="form-control" />
+					</div>
+				</form>
+				<button class="subBtn" id="i_login">登录</button>
+				<p class="prompt_info j_promptInfo"></p>
+				<p>还没有账号？马上去<span class="text_blue j_toReg">注册</span></p>
+			</div>
+			{% endif %}
+		</div>
+
+		<div class="left_side">
+			<div class="articalBlock" data-id="{{artical._id.toString()}}">
+				<h3 class="art_title">{{artical.title}}</h3>
+				<p class="art_info">
+					<span>添加时间：<b>{{artical.addTime|date("Y-m-d",-8*60)}}</b></span>
+					<span>作者：<b>{{artical.user.username}}</b></span>
+					<span>阅读量：<b>{{artical.views}}</b></span>
+				</p>
+				<p class="art_desc">简介：{{artical.desc}}</p>
+				<div class="art_cont">
+					{% for pg in artical.content %}
+						{% if pg.type == "code" %}
+							<pre>
+								<code class="codeStyle">{{pg.value}}</code>
+							</pre>
+						{% elif pg.type == "title" %}
+							<h4 class="vTitle">{{pg.value}}</h4>
+						{% elif pg.type == "img" %}
+							<div class="imgBox">
+								<img src="{{pg.value}}" />
+							</div>
+						{% else %}
+							<p>{{pg.value || pg}}</p>
+						{% endif %}
+					{% endfor %}
+					<div class="dividLine"></div>
+					<div class="comment_area">
+						<div class="clearfix"><span class="j_writeSth pull-right writeComment">写留言<b class="glyphicon glyphicon-pencil"></b></span></div>
+						<div class="writeBox clearfix">
+							<textarea class="form-control" rows="4"></textarea>
+							<button class="btn btn-success pull-right subComment j_subComment">提交</button>
+						</div>
+						<div class="comments_box">
+							{% for comment in comments %}
+								<div class="comment_item" data-id="{{comment._id.toString()}}">
+									<div class="comment_left">
+										<div class="user_face">
+											<img src='{{comment.user.userFace}}' />
+										</div>
+									</div>
+									<div class="comment_cont">
+										<p>{{comment.user.username}}</p>
+										<p>{{comment.value}}</p>
+										<p>{{comment.addTime|date("Y-m-d H:i",-8*60)}}</p>
+									</div>
+									<div class="com_approve j_doApprove">
+										<b class="glyphicon glyphicon-thumbs-up"></b>
+										<span>{{comment.approve}}</span>
+									</div>
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<div id="i_toast_mask" class="toast_mask"></div>
+<div id="i_toast_content" class="toast_content"></div>
+
+</body>
+</html>
