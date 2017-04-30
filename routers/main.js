@@ -52,34 +52,34 @@ router.get("/",function(req,res){
 	});
 });
 
-//文章阅读数
+//文章详情
 
-router.post("/artical/read",function(req,res){
-	var id = req.body.id;
+router.get("/artical",function(req,res){
+	var id = req.query.id;
 
-	Artical.findOne({_id:id}).then(function(art){
-		if(!art){
-			responseData.code = "1";
-			responseData.message = "数据库中未找到该文章！";
-			res.json(responseData);
-			return Promise.reject();
-		}else{
+	Category.find().then(function(cats){
+		Artical.findOne({_id:id}).populate("user").then(function(art){
+			//查找相关评论
+			Comment.where({art_id:id}).find().populate("user").sort({"addTime":-1}).then(function(comments){
+				//渲染查看文章页面
+				res.render("main/artical",{
+					"categories":cats,
+					"userInfo":req.userInfo,
+					"artical":art,
+					"comments":comments
+				})
+			})
+
 			var num = Number(art.views)+1;
 			return Artical.update({
 				_id:id
 			},{
 				views:num
 			})
-		}
-	}).then(function(newArt){
-		//显示评论
-		Comment.where({art_id:id}).find().populate("user").then(function(comments){
-			responseData.data = comments;
-			responseData.message = "阅读数加1！";
-			res.json(responseData);
-		})
-
-	});
+		}).then(function(newArt){
+			console.log(newArt);
+		});
+	})
 
 });
 
