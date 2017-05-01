@@ -10,6 +10,7 @@
 	<link type="text/css" rel="stylesheet" href="/public/css/main.css" />
 	<link type="text/css" rel="stylesheet" href="/public/css/bootstrap.min.css" />
 	<script src="/public/js/jquery-1.12.4.min.js"></script>
+	<script src="/public/js/bootstrap.min.js"></script>
 	<script src="/public/js/index.js"></script>
 	<script src="/public/js/artical.js"></script>
 </head>
@@ -41,7 +42,7 @@
 								{% for cat in categories %}
 									<li><a href="/?id={{cat._id.toString()}}">{{cat.name}}</a></li>
 								{% endfor %}
-
+								<li class="j_showLogin loginBtn"><a href="javascript:;">登录</a></li>
 							{% else %}
 								<li><a href="/">首页</a></li>
 								{% for cat in categories %}
@@ -51,7 +52,7 @@
 										<li><a href="/?id={{cat._id.toString()}}">{{cat.name}}</a></li>
 									{% endif %}
 								{% endfor %}
-
+								<li class="j_showLogin loginBtn"><a href="javascript:;">登录</a></li>
 							{% endif %}
 						</ul>
 					</div>
@@ -97,7 +98,7 @@
 						<input type="password" name="confirmword" class="form-control" />
 					</div>
 				</form>
-				<button class="subBtn" id="i_regist">注册</button>
+				<button class="subBtn myBtn" id="i_regist">注册</button>
 				<p class="prompt_info j_promptInfo"></p>
 				<p>已经有账号了？马上去<span class="text_blue j_toLogin">登录</span></p>
 			</div>
@@ -115,7 +116,7 @@
 						<input type="password" name="password" class="form-control" />
 					</div>
 				</form>
-				<button class="subBtn" id="i_login">登录</button>
+				<button class="subBtn myBtn" id="i_login">登录</button>
 				<p class="prompt_info j_promptInfo"></p>
 				<p>还没有账号？马上去<span class="text_blue j_toReg">注册</span></p>
 			</div>

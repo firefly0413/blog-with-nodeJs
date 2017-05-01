@@ -50,7 +50,6 @@ $(function(){
 	function getHtml(item){
 		//处理时间格式
 		var addTime = getTime(item.addTime);
-		console.log(item.addTime);
 		var html = '<div class="comment_item" data-id="'+ item._id.toString() +'">\
 					<div class="comment_left">\
 						<div class="user_face">\
