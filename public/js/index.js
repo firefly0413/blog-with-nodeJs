@@ -5,6 +5,11 @@ $(function(){
 	var oLogBox = $(".loginBox");
 	var logBtn = $("#i_login");
 
+	//弹出登录模块
+	$(".j_showLogin").off().on("click",function(){
+		$(".right_side").css("display","block");
+	});
+
 	//登录注册切换
 	$(".j_toReg").off("click",{}).on("click",function(){
 		oRegBox.show();
