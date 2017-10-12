@@ -1,5 +1,5 @@
 # blog-with-nodeJs
-this is a nodeJs project,i was learning nodejs resently!
+a blog based on nodeJs
 
 启动程序：
 
